@@ -15,6 +15,9 @@ def ufw_geomap(
     output_html: Annotated[
         cyclopts.types.ResolvedFile | None, cyclopts.Parameter()
     ] = None,
+    output_jsonl: Annotated[
+        cyclopts.types.ResolvedFile | None, cyclopts.Parameter()
+    ] = None,
 ) -> None:
     from ._impl import ufw_geomap_impl
 
@@ -23,4 +26,5 @@ def ufw_geomap(
         geoip=geoip,
         output_csv=output_csv,
         output_html=output_html,
+        output_jsonl=output_jsonl,
     )

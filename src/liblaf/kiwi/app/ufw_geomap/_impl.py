@@ -1,9 +1,9 @@
 import functools
-import io
 import re
-import subprocess as sp
 from pathlib import Path
 from typing import Any
+
+from loguru import logger
 
 from liblaf import grapes
 from liblaf.grapes.typed import PathLike
@@ -16,12 +16,15 @@ with grapes.optional_imports("liblaf-kiwi", "ufw-geomap"):
     import geoip2.models
     import polars as pl
 
+    from ._load import load_logs
+
 
 def ufw_geomap_impl(
     *log_files: Path,
     geoip: Path,
     output_csv: Path | None = None,
     output_html: Path | None = None,
+    output_jsonl: Path | None = None,
 ) -> None:
     logs: pl.DataFrame = load_logs(*log_files)
     db = geoip2.database.Reader(geoip)
@@ -33,34 +36,16 @@ def ufw_geomap_impl(
         .map_elements(functools.partial(query_ip, db=db), pl.Struct)
         .alias("SRC_GEOIP"),
     ).unnest("SRC_GEOIP")
+    logger.debug(query_ip.cache_info())
+    logger.debug(logs)
     if output_csv is not None:
         output_csv.parent.mkdir(parents=True, exist_ok=True)
         logs.write_csv(output_csv)
     if output_html is not None:
         plot_data(logs, outfile=output_html)
-
-
-def load_logs(*logs: Path) -> pl.DataFrame:
-    source: Any
-    if len(logs) == 0:
-        args: list[str] = [
-            "journalctl",
-            "--boot=all",
-            "--identifier=kernel",
-            r"--grep=^\[UFW BLOCK\]",
-            "--output=json",
-        ]
-        process: sp.CompletedProcess[str] = sp.run(
-            args, stdout=sp.PIPE, check=True, text=True
-        )
-        source = io.StringIO(process.stdout)
-    else:
-        source = list(logs)
-    data: pl.DataFrame = pl.read_ndjson(source)
-    data = data.with_columns(
-        pl.col("__REALTIME_TIMESTAMP").cast(pl.UInt64).cast(pl.Datetime)
-    )
-    return data
+    if output_jsonl is not None:
+        output_jsonl.parent.mkdir(parents=True, exist_ok=True)
+        logs.write_ndjson(output_jsonl)
 
 
 def parse_message(message: str) -> dict[str, str]:
@@ -76,7 +61,7 @@ def parse_message(message: str) -> dict[str, str]:
     return parsed
 
 
-@functools.lru_cache
+@functools.lru_cache(maxsize=65536)
 def query_ip(ip: str, db: geoip2.database.Reader) -> dict[str, Any]:
     try:
         city: geoip2.models.City = db.city(ip)
