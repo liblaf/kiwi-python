@@ -1,11 +1,14 @@
 # Changelog
 
-## [0.1.1](https://github.com/liblaf/kiwi-python/compare/v0.1.0...v0.1.1) (2025-06-09)
-
+## [0.1.1](https://github.com/liblaf/kiwi-python/compare/v0.1.0..v0.1.1) - 2025-06-09
 
 ### ✨ Features
 
-* **ufw-geomap:** add JSON Lines output support ([820e0a4](https://github.com/liblaf/kiwi-python/commit/820e0a402d313a518c82e869b867b060f12b10ea))
+- **ufw-geomap:** add JSON Lines output support - ([820e0a4](https://github.com/liblaf/kiwi-python/commit/820e0a402d313a518c82e869b867b060f12b10ea))
+
+### ❤️ New Contributors
+
+- [@liblaf](https://github.com/liblaf) made their first contribution
 
 ## [0.1.0] - 2025-06-09
 
@@ -17,4 +20,5 @@
 
 ### ❤️ New Contributors
 
+- [@liblaf-bot[bot]](https://github.com/apps/liblaf-bot) made their first contribution in [#2](https://github.com/liblaf/kiwi-python/pull/2)
 - [@liblaf](https://github.com/liblaf) made their first contribution
