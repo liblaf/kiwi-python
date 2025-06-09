@@ -55,7 +55,7 @@ def load_logs(*logs: Path) -> pl.DataFrame:
         )
         source = io.StringIO(process.stdout)
     else:
-        source = logs
+        source = list(logs)
     data: pl.DataFrame = pl.read_ndjson(source)
     data = data.with_columns(
         pl.col("__REALTIME_TIMESTAMP").cast(pl.UInt64).cast(pl.Datetime)
