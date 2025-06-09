@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Annotated
 
 import cyclopts
@@ -5,7 +6,9 @@ import cyclopts
 
 def ufw_geomap(
     *log_files: Annotated[cyclopts.types.ResolvedExistingFile, cyclopts.Argument()],
-    geoip: Annotated[cyclopts.types.ResolvedExistingFile, cyclopts.Parameter()],
+    geoip: Annotated[cyclopts.types.ResolvedExistingFile, cyclopts.Parameter()] = Path(  # noqa: B008
+        "~/.local/share/geoip/GeoLite2-City.mmdb"
+    ).expanduser(),
     output_csv: Annotated[
         cyclopts.types.ResolvedFile | None, cyclopts.Parameter()
     ] = None,
@@ -16,5 +19,8 @@ def ufw_geomap(
     from ._impl import ufw_geomap_impl
 
     ufw_geomap_impl(
-        *log_files, geoip=geoip, output_csv=output_csv, output_html=output_html
+        *log_files,
+        geoip=geoip,
+        output_csv=output_csv,
+        output_html=output_html,
     )

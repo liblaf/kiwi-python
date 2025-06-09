@@ -3,11 +3,7 @@ from pathlib import Path
 
 import platformdirs
 
-from liblaf.kiwi._version import __version__
-
-dirs = platformdirs.AppDirs(
-    appname="liblaf/kiwi", appauthor="liblaf", version=__version__
-)
+dirs = platformdirs.AppDirs(appname="liblaf/kiwi", appauthor="liblaf")
 iter_data_paths: Callable[[], Iterable[Path]] = dirs.iter_data_paths
 
 

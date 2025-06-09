@@ -1,6 +1,7 @@
-from ._dirs import dirs, iter_data_paths
+from ._dirs import dirs, find_data_path, iter_data_paths
 
 __all__ = [
     "dirs",
+    "find_data_path",
     "iter_data_paths",
 ]
