@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/liblaf/kiwi-python/compare/v0.1.0...v0.1.1) (2025-06-09)
+
+
+### ✨ Features
+
+* **ufw-geomap:** add JSON Lines output support ([820e0a4](https://github.com/liblaf/kiwi-python/commit/820e0a402d313a518c82e869b867b060f12b10ea))
+
 ## [0.1.0] - 2025-06-09
 
 ### ✨ Features
