@@ -1,0 +1,12 @@
+# -*- mode: yaml; -*-
+
+INHERIT: .config/copier/mkdocs.yaml
+site_name: "Kiwi"
+site_description: TODO
+
+plugins:
+  mkdocstrings:
+    handlers:
+      python:
+        inventories:
+          - https://docs.python.org/3/objects.inv
