@@ -1,5 +1,5 @@
 # -*- mode: toml; -*-
-#:schema https://json.schemastore.org/pyproject.json
+# :schema https://json.schemastore.org/pyproject.json
 # ref: <https://packaging.python.org/en/latest/specifications/pyproject-toml/>
 
 [build-system]
@@ -52,7 +52,15 @@ classifiers = [
   "Programming Language :: Python",
   "Typing :: Typed",
 ]
-dependencies = ["lazy-loader", "loguru", "rich"]
+dependencies = [
+  "cyclopts>=3.17.0,<4",
+  "lazy-loader>=0.4,<0.5",
+  "liblaf-grapes>=0.2.1,<0.3",
+  "loguru>=0.7.3,<0.8",
+  "platformdirs>=4.3.8",
+  "pydantic>=2.11.5,<3",
+  "rich>=14.0.0,<15",
+]
 description = "Add your description here"
 dynamic = ["version"]
 keywords = []
@@ -60,6 +68,12 @@ license = "MIT"
 name = "liblaf-kiwi"
 readme = "README.md"
 requires-python = ">=3.12"
+
+[project.optional-dependencies]
+ufw-geomap = ["folium>=0.19.7", "geoip2>=5.1.0", "polars>=1.30.0"]
+
+[project.scripts]
+kiwi = "liblaf.kiwi.app:main"
 
 [project.urls]
 "Changelog" = "https://github.com/liblaf/kiwi-python/blob/main/CHANGELOG.md"

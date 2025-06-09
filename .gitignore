@@ -192,3 +192,8 @@ junit.xml
 
 # pytest-benchmark
 .benchmarks/
+
+*.csv
+*.html
+*.mmdb
+geoip/
