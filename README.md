@@ -42,7 +42,7 @@ TODO: DESCRIPTION <br />
 To install `liblaf-kiwi`, run the following command:
 
 ```bash
-$ uv add liblaf-kiwi
+uv add liblaf-kiwi
 ```
 
 <div align="right" markdown>
@@ -60,9 +60,9 @@ You can use Github Codespaces for online development:
 Or clone it for local development:
 
 ```bash
-$ gh repo clone liblaf/kiwi-python
-$ cd kiwi-python
-$ just test
+gh repo clone liblaf/kiwi-python
+cd kiwi-python
+just test
 ```
 
 <div align="right" markdown>
